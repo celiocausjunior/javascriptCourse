@@ -13,9 +13,9 @@ let johnBmi = BMI(johnWeight, johnHeight);
 
 function isHigher(markBmi, johnBmi) {
     if (markBmi > johnBmi) {
-        return console.log(`"TEST1 -> Mark's BMI (${markBmi}) is higher than John's BMI (${johnBmi})"`)
+        return console.log(`"TEST -> Mark's BMI (${markBmi}) is higher than John's BMI (${johnBmi})"`)
     } else {
-        return console.log(`"TEST1 -> Mark's BMI (${markBmi}) is NOT higher than John's BMI (${johnBmi})"`)
+        return console.log(`"TEST -> Mark's BMI (${markBmi}) is NOT higher than John's BMI (${johnBmi})"`)
     }
 }
 isHigher(markBmi, johnBmi);
@@ -25,21 +25,6 @@ markWeight = 95;
 markHeight = 1.88;
 johnWeight = 85;
 johnHeight = 1.76;
-
-
-function BMI(weight, height) {
-    return weight / height ** 2;
-}
-
 markBmi = BMI(markWeight, markHeight);
 johnBmi = BMI(johnWeight, johnHeight);
-
-function isHigher2(markBmi, johnBmi) {
-    if (markBmi > johnBmi) {
-        return console.log(`"TEST2 -> Mark's BMI (${markBmi}) is higher than John's BMI (${johnBmi})"`)
-    } else {
-        return console.log(`"TEST2 -> Mark's BMI (${markBmi}) is NOT higher than John's BMI (${johnBmi})"`)
-    }
-}
-
-isHigher2(markBmi, johnBmi);
+isHigher(markBmi, johnBmi);

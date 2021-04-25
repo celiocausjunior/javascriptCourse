@@ -19,9 +19,9 @@ function calcAverage(arr) {
     for (let i = 0; i < arr.length; i++) {
         sum += arr[i];
     }
-    console.log(`Average: ${(sum/arr.length)}`);
+    console.log(`Average: ${(sum / arr.length)}`);
 }
 
 calcTip(bills);
 
-
+// BUG

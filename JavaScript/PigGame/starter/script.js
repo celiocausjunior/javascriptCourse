@@ -11,6 +11,10 @@ const diceEl = document.querySelector('.dice');
 const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
+let scores = [0, 0]
+let currentScore = 0;
+let activePlayer = 0;
+let playing = true;
 
 const incrementActivePlayerScore = function () {
     document.getElementById(`current--${activePlayer}`).textContent = currentScore;
@@ -44,10 +48,7 @@ score0El.textContent = 0;
 score1El.textContent = 0;
 diceEl.classList.add('hidden');
 
-let scores = [0, 0]
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
+
 
 
 // Rolling dice functionality

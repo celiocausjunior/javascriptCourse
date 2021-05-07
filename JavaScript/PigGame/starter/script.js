@@ -24,6 +24,21 @@ const switchPlayer = function () {
     player1El.classList.toggle('player--active');
 };
 
+const initGame = function(){
+        scores = [0, 0]
+        currentScore = 0;
+        activePlayer = 0;
+        playing = true;
+        diceEl.classList.add('hidden');
+    
+        for (let i = 0; i < scores.length; i++) {
+            document.querySelector(`.player--${i}`).classList.remove('player--winner');
+            document.querySelector(`.player--${i}`).classList.add('player--active');
+            document.getElementById(`score--${i}`).textContent = 0;
+            document.getElementById(`current--${i}`).textContent = 0;
+        }
+}
+
 //Starting Conditions
 score0El.textContent = 0;
 score1El.textContent = 0;
@@ -78,17 +93,4 @@ btnHold.addEventListener('click', function () {
     };
 });
 
-btnNew.addEventListener('click', function () {
-    scores = [0, 0]
-    currentScore = 0;
-    activePlayer = 0;
-    playing = true;
-    diceEl.classList.add('hidden');
-
-    for (let i = 0; i < scores.length; i++) {
-        document.querySelector(`.player--${i}`).classList.remove('player--winner');
-        document.querySelector(`.player--${i}`).classList.add('player--active');
-        document.getElementById(`score--${i}`).textContent = 0;
-        document.getElementById(`current--${i}`).textContent = 0;
-    }
-});
+btnNew.addEventListener('click', initGame);

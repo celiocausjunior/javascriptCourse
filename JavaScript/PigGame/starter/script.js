@@ -13,10 +13,7 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
 // initial variables
-let scores = [0, 0]
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
+let scores, currentScore, activePlayer, playing;
 
 const incrementActivePlayerScore = function () {
     document.getElementById(`current--${activePlayer}`).textContent = currentScore;
@@ -36,19 +33,18 @@ const initGame = function(){
         activePlayer = 0;
         playing = true;
         diceEl.classList.add('hidden');
-    
+        document.querySelector(`.player--0`).classList.add('player--active');
+        document.querySelector(`.player--1`).classList.remove('player--active');
+
         for (let i = 0; i < scores.length; i++) {
             document.querySelector(`.player--${i}`).classList.remove('player--winner');
-            document.querySelector(`.player--${i}`).classList.add('player--active');
             document.getElementById(`score--${i}`).textContent = 0;
             document.getElementById(`current--${i}`).textContent = 0;
         }
 }
 
 //Starting Conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
+initGame();
 
 // Rolling dice functionality
 btnRoll.addEventListener('click', function () {

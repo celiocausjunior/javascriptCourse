@@ -58,7 +58,7 @@ const game = {
   },
 };
 
-const [players1, players2] = game.players;
+/* const [players1, players2] = game.players;
 const [gk, ...fieldPlayers] = players1;
 console.log(gk,fieldPlayers);
 const allPlayers = [...players1, ...players2];
@@ -80,3 +80,47 @@ console.log(printGoals(...game.scored));
 
 (game.odds.team1 < game.odds.team2) && console.log('Team1 is more likely to win');
 (game.odds.team1 > game.odds.team2) && console.log('Team2 is more likely to win'); 
+
+ */
+
+
+//Exercise 2
+for (const [goal, playerName] of game.scored.entries()) {
+  console.log(`Goal ${goal + 1}: ${playerName}`);
+}
+
+//
+
+let sum = 0;
+let average = 0;
+const oddEntries = Object.values(game.odds)
+
+for (const OddValue of oddEntries) {
+  sum += OddValue;
+  average = sum / oddEntries.length
+}
+console.log(`Odd Average: ${average}`);
+
+//
+
+/* const { odds: { team1, x: draw, team2 } } = game;
+console.log(`Odd of victory ${game.team1}: ${team1}. \nOdd of victory ${game.team2}: ${team2}\nOdd of draw: ${draw}`); */
+
+const ratioOdds = Object.entries(game.odds);
+console.log(ratioOdds);
+
+for (const [team, ratio] of ratioOdds){
+  const victory = team === 'x' ? 'Odd of draw' : 'Odd of ' + game[team];
+
+  console.log(`${victory}: ${ratio}`);
+
+}
+
+//
+
+const scorers = {
+  'Lewandowski': 1,
+  'Gnarby': 2,
+  'Lewandowski': 1,
+  'Hummels': 1
+}

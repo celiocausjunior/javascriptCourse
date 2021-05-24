@@ -177,4 +177,4 @@ for (const [minutes, event] of gameEvents) {
 
 }
 
-console.log();
+console.log(gameEvents);

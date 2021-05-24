@@ -176,3 +176,5 @@ for (const [minutes, event] of gameEvents) {
     console.log(`${gameEvents.get(minutes < 45)} ${minutes}: ${event}`)
 
 }
+
+console.log();

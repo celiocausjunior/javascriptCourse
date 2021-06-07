@@ -83,6 +83,22 @@ const displayMovement = function (movements) {
 displayMovement(account1.movements);
 
 
+const createUserName = function (accounts) {
+
+  accounts.forEach(function (account) {
+    account.username = account.owner.toLocaleLowerCase().split(' ').map((word) => word[0]).join('');
+  });
+};
+
+createUserName(accounts);
+console.log(accounts);
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((x, y) => (x + y), 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcDisplayBalance(account1.movements);
 
 
 
@@ -92,11 +108,43 @@ displayMovement(account1.movements);
 
 
 
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// max value
+const maxValue = movements.reduce((x,y) => {
+  return (x>y) ?  x : y;
+}, movements[0]);
+console.log(maxValue);
 
 
 
 
 
+
+
+// const deposits = movements.filter(movement => (movement > 0));
+// console.log(deposits);
+
+
+// const depositsFor = []
+// for (let movement of movements) {
+//   (movement > 0 ? depositsFor.push(movement) : null);
+// }
+// console.log(depositsFor);
+
+
+// const withdrawal = movements.filter((movement) => movement < 0);
+
+// console.log(withdrawal);
+
+// const balance = movements.reduce((x, y) => x + y, 0);
+// console.log(balance);
+
+// let total = 0;
+// for (let mov of movements){
+//   total += mov;
+// }
+// console.log(total);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -185,7 +233,7 @@ displayMovement(account1.movements);
 ///////////////////////////////////////
 // Coding Challenge #1
 
-/* 
+/*
 Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners about their dog's age, and stored the data into an array (one array for each). For now, they are just interested in knowing whether a dog is an adult or a puppy. A dog is an adult if it is at least 3 years old, and it's a puppy if it's less than 3 years old.
 
 Create a function 'checkDogs', which accepts 2 arrays of dog's ages ('dogsJulia' and 'dogsKate'), and does the following things:
@@ -203,26 +251,69 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
-const juliaDataOne = [3, 5, 2, 12, 7];
-const juliaDataTwo = [9, 16, 6, 8, 3];
-const kateDataOne = [4, 1, 15, 8, 3]
-const kateDataTwo = [10, 5, 6, 1, 4]
+// const juliaDataOne = [3, 5, 2, 12, 7];
+// const juliaDataTwo = [9, 16, 6, 8, 3];
+// const kateDataOne = [4, 1, 15, 8, 3]
+// const kateDataTwo = [10, 5, 6, 1, 4]
 
-const juliaNormalizeData = juliaDataOne.slice(1).concat((juliaDataTwo).slice(0, -2));
-const kateNormalizeData = [...kateDataOne, ...kateDataTwo]
-const totalData = [...juliaNormalizeData, ...kateDataOne, ...kateDataTwo];
-console.log(totalData);
+// const juliaNormalizeData = juliaDataOne.slice(1).concat((juliaDataTwo).slice(0, -2));
+// const kateNormalizeData = [...kateDataOne, ...kateDataTwo]
+// const totalData = [...juliaNormalizeData, ...kateDataOne, ...kateDataTwo];
+// console.log(totalData);
 
-const checkDogs = function (dogsJulia, dogsKate) {
-  const checkDogAge = function (value, index) {
-    console.log(value >= 3 ? `Dog number ${index +1 } is an adult, and is ${value} years old` : `Dog number ${index + 1} is still a puppy 🐶`);
-  }
-  dogsJulia.forEach(function (value, index) {
-    checkDogAge(value, index);
-  });
-  dogsKate.forEach(function (value, index) {
-    checkDogAge(value, index);
-  });
-};
+// const checkDogs = function (dogsJulia, dogsKate) {
+//   const checkDogAge = function (value, index) {
+//     console.log(value >= 3 ? `Dog number ${index +1 } is an adult, and is ${value} years old` : `Dog number ${index + 1} is still a puppy 🐶`);
+//   }
+//   dogsJulia.forEach(function (value, index) {
+//     checkDogAge(value, index);
+//   });
+//   dogsKate.forEach(function (value, index) {
+//     checkDogAge(value, index);
+//   });
+// };
 
-checkDogs(juliaNormalizeData, kateNormalizeData);
+// checkDogs(juliaNormalizeData, kateNormalizeData);
+
+// // map method 
+
+// console.log(juliaDataOne.map((x)=> x*2));
+// console.log(kateDataOne.map(function(x) {
+//   return x**2
+// }));
+
+// // filter method
+// console.log(juliaDataTwo.filter((x)=> x<10));
+// console.log(juliaDataTwo.filter(function(x){
+//   return x > 5;
+// }));
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// console.log(movements);
+
+// const EurToUsd = 1.1;
+
+// const Eur = movements.map(function (movement) {
+//   return (Math.round(movement * EurToUsd));
+// });
+
+// console.log(Eur);
+
+// const EurArrow = movements.map(movement => (Math.round(movement * EurToUsd)));
+// console.log(EurArrow);
+
+// const arr = [];
+// for (let item of movements) {
+//   arr.push(Math.round(item * EurToUsd));
+// };
+// console.log(arr);
+
+
+
+
+// const movementsDescription = movements.map((movement, index) => {
+//   return (movement > 0 ? `Movement number: ${index + 1}. You've deposited ${Math.abs(movement)}`
+//   :`Movement number: ${index + 1}. You've withdrawn ${index, Math.abs(movement)}`);
+// });
+
+// console.log(movementsDescription);

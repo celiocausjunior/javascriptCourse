@@ -62,11 +62,13 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 
-const displayMovement = function (movements) {
+const displayMovements = function (movements, sort = false) {
 
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (mov, i) {
+  const sortedMovements = sort ? movements.slice().sort((x, y) => x - y) : movements;
+
+  sortedMovements.forEach(function (mov, i) {
 
     const type = (mov > 0 ? 'deposit' : 'withdrawal');
 
@@ -122,6 +124,27 @@ const EurToUsd = 1.1;
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+
+// //Equality
+// console.log(movements.includes(-130));
+
+
+// //Condition
+// console.log(movements.some((mov)=> mov > 0));
+// console.log(movements.some((mov)=> mov > 5000));
+
+//EVERY
+// console.log(movements.every((movement)=> movement > 0));
+// console.log(account4.movements.every((movement)=> movement > 0));
+
+//Separate Callback
+
+// const deposit = mov => mov>0;
+
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
 // max value
 const maxValue = movements.reduce((x, y) => {
   return (x > y) ? x : y;
@@ -133,7 +156,7 @@ console.log(totalDepositsUsd);
 
 const updateUI = function (currentAccount) {
   //Display Movements
-  displayMovement(currentAccount.movements);
+  displayMovements(currentAccount.movements);
 
   // Display Balance
   calcDisplayBalance(currentAccount);
@@ -188,29 +211,52 @@ btnTransfer.addEventListener('click', ((e) => {
 }))
 
 
-btnClose.addEventListener('click', (e)=> {
+btnClose.addEventListener('click', (e) => {
   e.preventDefault();
-  
-  if(currentAccount.username === inputCloseUsername.value &&
-    currentAccount.pin === Number(inputClosePin.value)){
 
-      const index = accounts.findIndex((index)=> index.username === currentAccount.username);
-      console.log(index);
+  if (currentAccount.username === inputCloseUsername.value &&
+    currentAccount.pin === Number(inputClosePin.value)) {
 
-      //Delete Account
-      accounts.splice(index,1);
+    const index = accounts.findIndex((index) => index.username === currentAccount.username);
+    console.log(index);
 
-      //Hide UI
-      containerApp.style.opacity=0;
+    //Delete Account
+    accounts.splice(index, 1);
 
-      // Clear inputs
-      inputCloseUsername.value = inputClosePin.value = '';
+    //Hide UI
+    containerApp.style.opacity = 0;
 
-    }else{
-      console.log('Wrong username or password');
-    }
+    // Clear inputs
+    inputCloseUsername.value = inputClosePin.value = '';
 
-})
+  } else {
+    console.log('Wrong username or password');
+  }
+
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some((movement) => movement >= 0.10 * amount)) {
+    currentAccount.movements.push(amount);
+    updateUI(currentAccount);
+    inputLoanAmount.value = '';
+
+  } else {
+    console.log('Call the mananger');
+  }
+});
+
+let sorted = false;
+btnSort.addEventListener('click', (e) => {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
+
+
+
 
 // const account = accounts.find((acc) => acc.owner==='Jessica Davis');
 // console.log(account);
@@ -435,18 +481,58 @@ GOOD LUCK 😀
 
 // GOOD LUCK 😀
 
-const calcAverageHumanAge = (ages) =>
-  ages
-    .map((age) => age <= 2 ? age * 2 : 16 + (age * 4))
-    .filter((age) => age >= 18)
-    .reduce((x, y, i, arr) => x + y / arr.length, 0);
+// const calcAverageHumanAge = (ages) =>
+//   ages
+//     .map((age) => age <= 2 ? age * 2 : 16 + (age * 4))
+//     .filter((age) => age >= 18)
+//     .reduce((x, y, i, arr) => x + y / arr.length, 0);
 
 
 
-console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
-console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
+// console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+// console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
 
 
 
-const firstWithdrawal = movements.find((mov) => mov < 0);
-console.log(firstWithdrawal);
+// const firstWithdrawal = movements.find((mov) => mov < 0);
+// console.log(firstWithdrawal);
+
+
+//Flat Method
+
+const arr = [0, 1, [2, 3, 4], [5, 6], 7, 8, 9, 10]
+const arr2 = [0, 1, [2, [3, 4]], [5, 6], 7, [[8, 9]], 10]
+
+console.log(arr.flat());
+console.log(arr2.flat(2));
+
+const accountMovements = accounts.map((account) => account.movements);
+console.log(accountMovements);
+const arrayMovements = accountMovements.flat();
+console.log(arrayMovements);
+
+const sumMovements = arrayMovements.reduce((x, y) => x + y, 0)
+console.log(sumMovements);
+
+//FlatMap Method
+
+const sumMovements2 = accounts.flatMap((account) => account.movements).reduce((x, y) => x + y, 0);
+console.log(sumMovements2);
+
+
+const names = ['Celio', 'Geraldo', 'Eliezer', 'Julia', 'Marcos', 'Mauricio', 'Eric', 'Jonas', 'Carlos', 'Gabriela', 'Gabrielle', 'Clayton', 'Gersino', 'Pyetra', 'Evandro', 'Jean', 'Wesley', 'Valdenir', 'Munir', 'Gersino', 'Rodrigo', 'Gilberto', 'Renan', 'Jacqueline', 'Angelica', 'Ester', 'Joao', 'Rafael'];
+
+
+//Sort mutates the array, but it works only in strings
+console.log(names.sort());
+
+//Numbers uses callback function
+movements.sort((x, y) => {
+  return (x > y ? 1 : -1);
+});
+console.log(movements);
+
+//Numbers uses callback function (simplified function)
+movements.sort((x, y) => y - x);
+
+console.log(movements);

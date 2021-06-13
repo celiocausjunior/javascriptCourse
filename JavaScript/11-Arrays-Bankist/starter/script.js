@@ -536,3 +536,33 @@ console.log(movements);
 movements.sort((x, y) => y - x);
 
 console.log(movements);
+
+
+//create an Array
+const x = new Array(7);
+console.log(x);
+
+x.fill(2,0,7);
+console.log(x);
+
+
+//Array.from
+
+const y = Array.from({length:20}, ()=>1);
+console.log(y);
+
+
+//Dynamic Array
+const z = Array.from({length:150}, (_,y)=> y+1);
+console.log(z);
+
+//Random Array
+const randomArray = Array.from({length:100}, (_,__)=> Math.floor(Math.random()*101)+1);
+console.log(randomArray);
+
+//Getting an element and add in array
+labelBalance.addEventListener('click', function(){
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'),(x)=>
+  Number(x.textContent.replace('€', ' ')));
+  console.log(movementsUI);
+})
